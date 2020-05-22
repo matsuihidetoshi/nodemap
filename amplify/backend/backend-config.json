@@ -1,0 +1,10 @@
+{
+	"auth": {
+		"nodemape5b3a2bf": {
+			"service": "Cognito",
+			"providerPlugin": "awscloudformation",
+			"dependsOn": [],
+			"customAuth": false
+		}
+	}
+}
