@@ -38,19 +38,22 @@
     </v-app-bar>
 
     <v-content>
-      <HelloWorld/>
+      <router-view />
+      <v-card class="d-flex justify-space-around pa-3 ma-3">
+        <v-btn class="primary" to="/">Home</v-btn>
+        <v-btn class="primary" to="/signin">SignIn</v-btn>
+        <v-btn class="primary" to="/about">About</v-btn>
+      </v-card>
     </v-content>
   </v-app>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld';
 
 export default {
   name: 'App',
 
   components: {
-    HelloWorld,
   },
 
   data: () => ({

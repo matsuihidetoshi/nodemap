@@ -3,13 +3,26 @@ import App from './App.vue'
 import './registerServiceWorker'
 import router from './router'
 import store from './store'
-import vuetify from './plugins/vuetify';
+import './localize'
+import Amplify, * as AmplifyModules from 'aws-amplify'
+import { AmplifyPlugin } from 'aws-amplify-vue'
+import aws_exports from './aws-exports'
+import { components } from 'aws-amplify-vue'
+import vuetify from './plugins/vuetify'
 
 Vue.config.productionTip = false
+
+Amplify.configure(aws_exports)
+
+Vue.use(AmplifyPlugin, AmplifyModules)
 
 new Vue({
   router,
   store,
   vuetify,
+  components: { 
+    App,
+    ...components
+  },
   render: h => h(App)
 }).$mount('#app')

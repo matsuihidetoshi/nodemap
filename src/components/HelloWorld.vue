@@ -11,86 +11,10 @@
       </v-col>
 
       <v-col class="mb-4">
-        <h1 class="display-2 font-weight-bold mb-3">
-          Welcome to Vuetify
-        </h1>
-
         <v-btn @click="listNodes">test</v-btn>
-
         <p>nodes: {{ nodes }}</p>
-
-        <p class="subheading font-weight-regular">
-          For help and collaboration with other Vuetify developers,
-          <br>please join our online
-          <a
-            href="https://community.vuetifyjs.com"
-            target="_blank"
-          >Discord Community</a>
-        </p>
       </v-col>
 
-      <v-col
-        class="mb-5"
-        cols="12"
-      >
-        <h2 class="headline font-weight-bold mb-3">
-          What's next?
-        </h2>
-
-        <v-row justify="center">
-          <a
-            v-for="(next, i) in whatsNext"
-            :key="i"
-            :href="next.href"
-            class="subheading mx-3"
-            target="_blank"
-          >
-            {{ next.text }}
-          </a>
-        </v-row>
-      </v-col>
-
-      <v-col
-        class="mb-5"
-        cols="12"
-      >
-        <h2 class="headline font-weight-bold mb-3">
-          Important Links
-        </h2>
-
-        <v-row justify="center">
-          <a
-            v-for="(link, i) in importantLinks"
-            :key="i"
-            :href="link.href"
-            class="subheading mx-3"
-            target="_blank"
-          >
-            {{ link.text }}
-          </a>
-        </v-row>
-      </v-col>
-
-      <v-col
-        class="mb-5"
-        cols="12"
-      >
-        <h2 class="headline font-weight-bold mb-3">
-          Ecosystem
-        </h2>
-
-        <v-row justify="center">
-          <a
-            v-for="(eco, i) in ecosystem"
-            :key="i"
-            :href="eco.href"
-            class="subheading mx-3"
-            target="_blank"
-          >
-            {{ eco.text }}
-          </a>
-        </v-row>
-      </v-col>
     </v-row>
   </v-container>
 </template>
@@ -103,6 +27,7 @@
 
     data() {
       return {
+        token: localStorage.getItem('CognitoIdentityServiceProvider.2k3jgggf71h44kedn96l7tjn8k.a2dc5200-eaa6-40fa-a856-c8f65ab1ab88.idToken'),
         ecosystem: [
           {
             text: 'vuetify-loader',
@@ -159,7 +84,10 @@
     methods: {
       listNodes: function() {
         axios.get('https://6big0ypl22.execute-api.ap-northeast-1.amazonaws.com/default/api/v1/nodes/',
-        {}).then(response => (
+        {
+          headers: { "Authorization": this.token },
+          data: {}
+        }).then(response => (
           this.nodes = response
         )).catch(error => (
           this.nodes = error
